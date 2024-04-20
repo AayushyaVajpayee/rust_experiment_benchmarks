@@ -7,7 +7,7 @@ edition = "2021"
 [[bench]]
 #hex_vs_faster_hex.rs
 #vec_vs_bytes
-name = "hex_vs_faster_hex"
+name = "main"
 harness = false
 [dependencies]
 criterion = "0.5.1"
