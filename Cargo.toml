@@ -1,0 +1,19 @@
+[package]
+name = "untitled"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bench]]
+#hex_vs_faster_hex.rs
+#vec_vs_bytes
+name = "hex_vs_faster_hex"
+harness = false
+[dependencies]
+criterion = "0.5.1"
+faster-hex = "0.9.0"
+ring = "0.17.8"
+hex = { version = "0.4.3",features = ["alloc"] }
+regex = "1.10.4"
+lazy_static = "1.4.0"
+once_cell = "1.19.0"
