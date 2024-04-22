@@ -6,6 +6,13 @@ use criterion::{black_box, Criterion, criterion_group, criterion_main};
 use ring::digest::Context;
 use ring::digest::SHA256;
 
+pub fn gen_using_base16ct(v: &[impl AsRef<[u8]>]) -> String {
+    let mut ctx = Context::new(&SHA256);
+    for src in v {
+        ctx.update(src.as_ref());
+    }
+    base16ct::lower::encode_string(ctx.finish().as_ref())
+}
 pub fn gen_using_faster_hex(v: &[impl AsRef<[u8]>]) -> String {
     let mut ctx = Context::new(&SHA256);
     for src in v {
@@ -64,6 +71,9 @@ fn bench_comparison(c: &mut Criterion) {
     }));
     group.bench_function("using faster-hex", |b| b.iter(|| {
         gen_using_faster_hex(&black_box(&input))
+    }));
+    group.bench_function("using base16ct", |b| b.iter(|| {
+        gen_using_base16ct(&black_box(&input))
     }));
     group.finish();
 }
